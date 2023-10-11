@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../estilos/dashboard.css";
-import Header from "../Componentes/Header";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faUser, faLock, faRegistered } from '@fortawesome/free-solid-svg-icons';
+import axios from "axios";
 
 
 function Dashboard() {
+
+  const [ Users, setUsers ] = useState([]);
+  useEffect( () => {
+    fetchUsers();
+  },[]);
+
+  console.log("Hola");
+
+  const fetchUsers = async () => {
+    
+    const response = await axios.get('http://localhost:3000/users')
+    setUsers(response.data)
+    console.log(response)
+    
+  }
+
   return (
     <>
       <div>
@@ -49,62 +65,52 @@ function Dashboard() {
             </div>
         </div>
 
-        <div class="p-4 sm:ml-50">
-        <div class="p-20 border-dashed">
+        <div className="p-4 sm:ml-50">
+  <div className="p-20 border-dashed">
+    <div className="flex items-center justify-center h-48 mb-4 rounded">
+      <div className="container">
+        <div className="relative left-70 top-24">
 
-          <div class="flex items-center justify-center h-48 mb-4 rounded">
-            <div class="container">
-              <div class="relative  left-70 top-24">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                  <thead class="text-xs text-gray-900 uppercase dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                      <th scope="col" class="px-6 py-3">
-                        Product name
-                      </th>
-                      <th scope="col" class="px-6 py-3">
-                        Color
-                      </th>
-                      <th scope="col" class="px-6 py-3">
-                        Category
-                      </th>
-                      <th scope="col" class="px-6 py-3">
-                        Price
-                      </th>
-                      <th scope="col" class="px-6 py-3">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="border-b dark:border-gray-700">
-                      <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        Apple MacBook Pro 17"
-                      </th>
-                      <td class="px-6 py-4">
-                        Silver
-                      </td>
-                      <td class="px-6 py-4">
-                        Laptop
-                      </td>
-                      <td class="px-6 py-4">
-                        $2999
-                      </td>
-                      <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                      </td>
-                    </tr>
-                 
-                  
-                  </tbody>
-                </table>
-              </div>
+          <table className="w-full table">
+            <thead className="table-header">
+              <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Contrasenia</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
 
-            </div>
-          </div>
-
-
+            <tbody>
+            {Users.map((users) =>(
+              <tr className="table-row">
+                <th scope="row">
+                  {users.UserName}
+                </th>
+                <td>
+                  {users.Nombre}
+                </td>
+                <td>
+                {users.Apellido}
+                </td>
+                <td>
+                {users.Password}
+                </td>
+                <td>
+                  <a href="#" className="table-link">
+                    Edit
+                  </a>
+                </td>
+              </tr>
+         ))}
+            </tbody>
+          </table>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 
         </section>
       </div>

@@ -1,0 +1,49 @@
+.banner {
+    background: url("https://media.istockphoto.com/id/1293017851/es/foto/mujer-doctor-desconocida-llenando-un-formulario-de-solicitud-mientras-consulta-al-paciente.jpg?s=612x612&w=0&k=20&c=LKSdYgC-gPJxouA2xySTQxL4rWW7uGwNgBem0vLXH8E=") 50% no-repeat;
+    background-size: cover;
+    height: 55vh;
+    width: 100%;
+    text-align: center;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+
+  .secciones{
+    background-color: rgb(79, 189, 250);
+    height: 300px;
+    display: flex;
+    
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  .bloque {
+    max-height: 275px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2px;
+    background-color: white;
+    margin: 10px;
+  }
+  
+  .img {
+    max-width: 300px;
+    height: 220px;
+    border-radius: 20px;
+  }
+  
+  .bloque p {
+    margin-top: 10px;
+  }

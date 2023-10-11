@@ -34,7 +34,7 @@
 .seccion {
   background-color: #ffffff;
   height: 100%;
-  margin-left: 200px;
+  margin-left: 280px;
   
 }
 
@@ -73,4 +73,41 @@
 
 .icono{
  font-size: 45px;
+}
+
+.table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+.table-header {
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #F7F7F7;
+}
+
+.table-row {
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-row th,
+.table-row td {
+  padding: 1rem;
+  font-size: 0.875rem;
+}
+
+.table-link {
+  color: #3182CE;
+  text-decoration: none;
+}
+
+.table-link:hover {
+  text-decoration: underline;
 }
