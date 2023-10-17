@@ -1,26 +1,69 @@
 import React, { useEffect, useState } from "react";
 import "../estilos/dashboard.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faUser, faLock, faRegistered } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
+import Formulario from "./Formulario";
+import EditForm from "./Editform";
 
 
 function Dashboard() {
-
+  //Obtener usuarios
   const [ Users, setUsers ] = useState([]);
   useEffect( () => {
     fetchUsers();
   },[]);
 
-  console.log("Hola");
-
   const fetchUsers = async () => {
     
     const response = await axios.get('http://localhost:3000/users')
     setUsers(response.data)
-    console.log(response)
-    
+    console.log(response)    
+  }
+
+  //Obtener usuarios por id
+  const { id } = useParams();
+
+  useEffect(() => {
+    // Realiza una solicitud para obtener los datos de usuario específicos por su id
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/users/${id}`);
+        setUsers(response.data);
+      } catch (error) {
+        console.log("Error al cargar los datos del usuario");
+      }
+    };
+
+    fetchUsers();
+  }, [id]);
+
+
+  //Eliminar usuarios
+  const HandeDelete = async (id) => {
+    const response = await axios.delete(`http://localhost:3000/users/${id}`);
+
+    if(response.status == 200){
+      alert("El usuario se borro correctamente");
+    }else{
+      alert("Error");
+    }
+    fetchUsers();
+  }
+
+  //Llamar formulario
+  
+  const [mostrarForm, setMostrarForm] = useState(false);
+
+  const MostrarForm = () =>{
+   setMostrarForm(true);
+  }
+
+  const [mostrarEdit, setMostrarEdit] = useState(false);
+
+  const MostrarEdit = () =>{
+   setMostrarEdit(true);
   }
 
   return (
@@ -78,13 +121,14 @@ function Dashboard() {
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
                 <th scope="col">Contrasenia</th>
-                <th scope="col">Action</th>
+                <th scope="col">Eliminar</th>
+                <th scope="col">Agregar</th>
               </tr>
             </thead>
 
             <tbody>
             {Users.map((users) =>(
-              <tr className="table-row">
+              <tr className="table-row" key={users.id}>
                 <th scope="row">
                   {users.UserName}
                 </th>
@@ -92,15 +136,18 @@ function Dashboard() {
                   {users.Nombre}
                 </td>
                 <td>
-                {users.Apellido}
+                  {users.Apellido}
                 </td>
                 <td>
-                {users.Password}
+                  {users.Password}
                 </td>
                 <td>
-                  <a href="#" className="table-link">
-                    Edit
-                  </a>
+              <Link onClick={() => HandeDelete(users.id)}> Eliminar</Link>
+              <br></br>
+              <Link onClick={() => MostrarEdit(users.id)}> Editar</Link>
+                </td>
+                <td>
+                <Link to="" onClick={MostrarForm}> Crear</Link>
                 </td>
               </tr>
          ))}
@@ -111,6 +158,9 @@ function Dashboard() {
     </div>
   </div>
 </div>
+
+      {mostrarForm && <Formulario />}
+      {mostrarEdit && <EditForm />} 
 
         </section>
       </div>

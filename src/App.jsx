@@ -5,6 +5,7 @@ import Index from './Paginas/Index';
 import Formulario from './Paginas/Formulario';
 import Login from './Paginas/Login';
 import Dashboard from './Paginas/Dashboard';
+import Editform from './Paginas/Editform';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/Formulario" element={<Formulario/>} />
       <Route path='/Login' element={<Login/>} />
       <Route path='/dashboard' element={<Dashboard/>} />
+      <Route path='/edit/:id' element={<Editform/>} />
     </Routes>
     </BrowserRouter>
   );

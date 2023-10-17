@@ -7,8 +7,11 @@ import { faHouse, faUsers, faSuitcaseMedical, faUserPlus, faUser } from '@fortaw
 function Header(){
     return(
         <>
-            <nav className="barra-navegacion">
-                <div></div>            
+            <nav className="barra-navegacion">  
+            <div className="sitio"> 
+            <img className="logo" src="https://img.freepik.com/vector-premium/signo-medico-estrella-vida-icono-hospital-ambulancia-estrella-glifo-estilo-pictograma_599062-3817.jpg" />
+            <h4 className="nombre">MED-HEALTH</h4>
+            </div> 
                 <ul className="lista-enlaces">
                     <li>
                         <Link to="/"><FontAwesomeIcon icon={faHouse} />  Inicio</Link>
